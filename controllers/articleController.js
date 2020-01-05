@@ -29,7 +29,8 @@ router.get("/scrape", function(res,req) {
         //load the body of HTML
         var $ = cheerio.load(response.data);
         //Loop anything through containing H4 Headline-Url tags using Cheerio
-        $(".c-entry-box--compact__title").each(function(i, element) {
+        
+        $("Component-h1-0-2-30").each(function(i, element) {
             var results = {};
             //Saves H4 tags as headlines
             results.headline = $(this)
@@ -60,3 +61,4 @@ router.get("/scrape", function(res,req) {
 
     })
 })
+//Route to get all Articles from 
