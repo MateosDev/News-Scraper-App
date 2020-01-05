@@ -1,0 +1,27 @@
+{
+  "name": "news-scraper-app",
+  "version": "1.0.0",
+  "description": "App used to scrape the web for news articles. Uses MongoDB, Node.js, along with Express and Express Handlebars.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/MateosDev/News-Scraper-App.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/MateosDev/News-Scraper-App/issues"
+  },
+  "homepage": "https://github.com/MateosDev/News-Scraper-App#readme",
+  "dependencies": {
+    "axios": "^0.19.0",
+    "cheerio": "^1.0.0-rc.3",
+    "express": "^4.17.1",
+    "express-handlebars": "^3.1.0",
+    "mongoose": "^5.8.4",
+    "morgan": "^1.9.1"
+  }
+}
