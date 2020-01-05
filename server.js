@@ -19,6 +19,8 @@ app.use(express.json());
 var MONGODB_URI = process.env.MONGODB_URI || "mongodb://localhost/mongoHeadlines";
 var db = mongoose.connection;
 mongoose.connect(MONGODB_URI, { useNewUrlParser: true });
+db.on("error", console.error.bind(console, "connection error"));
+db.once("open", () => console.log("Connected to Mongoose!"));
 
 
 //CONNECT APP TO PUBLIC FOLDER 
