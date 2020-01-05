@@ -29,8 +29,8 @@ app.engine("handlebars", exphbs({ defaultLayout: "main"}));
 app.set("view engine", "handlebars");
 
 //IMPORT ROUTES FOR SERVER USE
-// var routes = require("./controllers/articlesController.js");
-// app.use(routes);
+var routes = require("./controllers/articlesController.js");
+app.use(routes);
 
 //Server Listening / Start
 
