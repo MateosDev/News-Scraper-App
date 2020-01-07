@@ -1,11 +1,10 @@
-//DEPENDENCIES
+
 var express = require("express");
 var router = express.Router();
-var path = require("path");
+
+var axios = require("axios");
 var cheerio = require("cheerio");
 var db = require("../models");
-var Comment = require("../models/Comments.js");
-var Article = require("../models/Article.js");
 
 //Route for ALL ARTICLES
 router.get("/", function(req,res){
@@ -22,30 +21,31 @@ router.get("/", function(req,res){
         });
 });
 
-router.get("/scrape", function(res,req) {
+router.get("/scrape", function(req,res) {
     //Use Axios To Grab Body
-    axios.get("https://associatedpress.com")//notice it doesnt have a / behind .com, not all will
+    var url = "https://apnews.com/";
+    axios.get(url)//notice it doesnt have a / behind .com, not all will
     .then(function(response) {
         //load the body of HTML
         var $ = cheerio.load(response.data);
         //Loop anything through containing H4 Headline-Url tags using Cheerio
         
-        $("Component-h1-0-2-30").each(function(i, element) {
-            var results = {};
+        $(".Component-root-0-2-9").each(function(i, element) {
+            var result = {};
             //Saves H4 tags as headlines
-            results.headline = $(this)
-            .find("h3")
+            result.headline = $(this)
+            .find("h1")
             .html();
-            results.summary = $(this)
+            result.summary = $(this)
             .find("p")
             .html();
             //h4s A Tag gets saved as URL
             var aTag = $(this)
                 .find("a")
                 .attr("href");
-                results.url = "http://associatedpress.com" + aTag;
+                result.url = "https://apnews.com" + aTag;
                 //New Article Creation
-                db.Article.create(results)
+                db.Article.create(result)
                 .then(function(dbArticle) {
                     //check console for the result
                     console.log(dbArticle);
@@ -90,7 +90,7 @@ router.get("/articles/ :id", function(req,res) {
         .then(function(dbComment) {
             return db.Article.findOneAndUpdate(
                 {_id: req.params.id },
-                { note: dbNote._id},
+                { Comment: dbComment._id},
                 { new:true}
             );
         })
@@ -103,3 +103,4 @@ router.get("/articles/ :id", function(req,res) {
     });
 
     module.exports = router;
+

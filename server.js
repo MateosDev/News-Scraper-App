@@ -4,7 +4,8 @@ var exphbs = require("express-handlebars");
 var logger = require("morgan");
 var mongoose = require("mongoose");
 var app = express();
-
+// var axios =require("axios");
+// var path = require("path");
 //SERVER STUFF
 var port = process.env.PORT || 3000;
 app.listen(port, () => console.log("Listening on port " + port));
@@ -17,10 +18,9 @@ app.use(express.json());
 
 //MONGODB Connection
 var MONGODB_URI = process.env.MONGODB_URI || "mongodb://localhost/mongoHeadlines";
-var db = mongoose.connection;
+
 mongoose.connect(MONGODB_URI, { useNewUrlParser: true });
-db.on("error", console.error.bind(console, "connection error"));
-db.once("open", () => console.log("Connected to Mongoose!"));
+
 
 
 //CONNECT APP TO PUBLIC FOLDER 
@@ -29,7 +29,7 @@ app.engine("handlebars", exphbs({ defaultLayout: "main"}));
 app.set("view engine", "handlebars");
 
 //IMPORT ROUTES FOR SERVER USE
-var routes = require("./controllers/articlesController.js");
+var routes = require("./controllers/articleController");
 app.use(routes);
 
 //Server Listening / Start

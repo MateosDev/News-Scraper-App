@@ -12,3 +12,4 @@ var Comment = mongoose.model("Comment", CommentSchema);
 
 //Export the COMMENT MODULE
 module.exports = Comment; 
+
