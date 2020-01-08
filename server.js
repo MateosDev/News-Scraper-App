@@ -8,8 +8,7 @@ var app = express();
 // var path = require("path");
 //SERVER STUFF
 var port = process.env.PORT || 3000;
-app.listen(port, () => console.log("Listening on port " + port));
-//How ya like that ES6 :P
+
 
 //Parse into JSON - BodyParser not recommended
 app.use(logger("dev"));
@@ -18,6 +17,7 @@ app.use(express.json());
 
 //MONGODB Connection
 var MONGODB_URI = process.env.MONGODB_URI || "mongodb://localhost/mongoHeadlines";
+
 
 mongoose.connect(MONGODB_URI, { useNewUrlParser: true });
 
@@ -34,3 +34,5 @@ app.use(routes);
 
 //Server Listening / Start
 
+app.listen(port, () => console.log("Listening on port " + port));
+//How ya like that ES6 :P

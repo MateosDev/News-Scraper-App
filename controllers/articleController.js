@@ -40,24 +40,27 @@ router.get("/scrape", function(req,res) {
             .find("p")
             .html();
             //h4s A Tag gets saved as URL
+            console.log(result);
+            
             var aTag = $(this)
                 .find("a")
                 .attr("href");
                 result.url = "https://apnews.com" + aTag;
                 //New Article Creation
-                db.Article.create(result)
-                .then(function(dbArticle) {
-                    //check console for the result
-                    console.log(dbArticle);
-                })
-                .catch(function(err) {
-                    //logs any errors
-                    console.log(err);
-                });
+                // db.Article.create(result)
+                // .then(function(dbArticle) {
+                //     //check console for the result
+                //     console.log(dbArticle);
+                // })
+                // .catch(function(err) {
+                //     //logs any errors
+                //     console.log(err);
+                // });
 
         });
         //Search/Scrape Complete Message to Client Side
         res.send("Scrape is Complete");
+        console.log("These are the results");
 
     });
 });
